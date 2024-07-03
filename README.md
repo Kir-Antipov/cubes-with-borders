@@ -11,6 +11,8 @@
 [![CurseForge](https://img.shields.io/curseforge/dt/1056527?color=F16436&logo=curseforge)](https://www.curseforge.com/minecraft/mc-mods/cubes-with-borders)
 [![License](https://img.shields.io/github/license/Kir-Antipov/cubes-with-borders?style=flat&cacheSeconds=36000)](https://github.com/Kir-Antipov/cubes-with-borders/blob/HEAD/LICENSE.md)
 
+<img alt="Cubes With Borders Icon" src="media/icon.png" width="128">
+
 So, you know all those mods that advertise themselves as being able to turn Minecraft's fullscreen mode into a borderless fullscreen one? Well, here's some news - that's false advertising. What you actually get is regular exclusive fullscreen mode, which Minecraft already uses, with a single tweak: the game window doesn't minimize whenever it loses focus. Since the game stays in exclusive fullscreen mode, you will experience flickering whenever it loses or gains focus, and you won't be able to open other apps and overlays on top of it. In other words, you are not actually gaining any benefits of borderless fullscreen mode.
 
 I have a mod that implements borderless fullscreen mode properly - [Cubes Without Borders](https://github.com/Kir-Antipov/cubes-without-borders). This is most likely what you are looking for. However, if you are obsessed with the idea of exclusive fullscreen and just wish that it wouldn't automatically minimize when it loses focus, then this abomination of a mod is for you.
