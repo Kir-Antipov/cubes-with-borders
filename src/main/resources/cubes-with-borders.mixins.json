@@ -4,6 +4,7 @@
   "package": "dev.kir.cubeswithborders.client.mixin",
   "compatibilityLevel": "JAVA_${java}",
   "client": [
+    "WindowMixin"
   ],
   "injectors": {
     "defaultRequire": 1
