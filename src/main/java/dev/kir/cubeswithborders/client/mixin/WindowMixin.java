@@ -18,7 +18,7 @@ abstract class WindowMixin {
     private @Final long handle;
 
     @Inject(method = "method_4479", at = @At("RETURN"))
-    private void updateWindowRegion(CallbackInfo ci) {
+    private void disableAutoIconify(CallbackInfo ci) {
         GLFW.glfwSetWindowAttrib(this.handle, GLFW.GLFW_AUTO_ICONIFY, GLFW.GLFW_FALSE);
     }
 }
