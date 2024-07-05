@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Environment(EnvType.CLIENT)
@@ -16,6 +17,36 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 abstract class WindowMixin {
     @Shadow
     private @Final long handle;
+
+    @Shadow
+    private int width;
+
+    @Shadow
+    private int height;
+
+    @ModifyArg(method = "method_4479", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetWindowMonitor(JJIIIII)V", ordinal = 0), index = 1)
+    private long enableContextSwitchingOnWindows(long monitor) {
+        if (!System.getProperty("os.name").contains("Windows")) {
+            return monitor;
+        }
+
+        int width = this.width;
+        int height = this.height;
+        GLFW.glfwSetWindowAttrib(this.handle, GLFW.GLFW_DECORATED, GLFW.GLFW_FALSE);
+        this.width = width;
+        this.height = height;
+
+        return 0;
+    }
+
+    @Inject(method = "method_4479", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwSetWindowMonitor(JJIIIII)V", ordinal = 1, shift = At.Shift.BEFORE))
+    private void restoreWindowDecorations(CallbackInfo ci) {
+        int width = this.width;
+        int height = this.height;
+        GLFW.glfwSetWindowAttrib(this.handle, GLFW.GLFW_DECORATED, GLFW.GLFW_TRUE);
+        this.width = width;
+        this.height = height;
+    }
 
     @Inject(method = "method_4479", at = @At("RETURN"))
     private void disableAutoIconify(CallbackInfo ci) {
